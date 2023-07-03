@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_Promise基本语法理解</title>
+</head>
+
+<body>
+    <script>
+
+        /*
+        Promise 承诺
+        Promise 是 ES6 对异步编程提供的一种解决方案,比传统的解决方案（回调函数嵌套）更合理更强大
+        Promise 可以将异步程序以同步程序的流程表达出来，避免多层回调函数嵌套
+        Promise 可以简单理解为一个容器，里面放着将来完成的异步程序
+        Promise 是一个构造函数, 用于创建 Promise 实例对象
+
+        Promise对象总共有三种状态：
+        1.pending 进行中
+        2.fulfilled 成功
+        3.rejected 失败
+
+        Promise对象状态改变有两种：
+        1.从 pending 改变为 fulfilled
+        2.从 pending 改变为 rejected
+
+        注意：
+        1.创建Promise对象时，必须要传入执行器函数，否则报错 TypeError
+        2.如果Promise对象为失败状态，错误会报在浏览器中
+        3.对于一个Promise对象重点关注它的状态和结果
+        */
+
+        // 创建一个Promise对象
+        let p1 = new Promise(function (resolve, reject) { // executor 执行器函数, 同步执行
+
+            // 当执行器函数被JS引擎调用时，会传入两个实参resolve和reject
+            // resolve 是一个函数，作用是将 p1 的状态改变为 fulfilled
+            // reject 是一个函数，作用是将 p1 的状态改变为 rejected
+
+            // 可以改变 p1 状态的行为：
+            // 1. resolve() 不传参数 将 p1 的状态改为成功结果为undefined
+            // resolve()
+            // 2. resolve(实参) 传参, 可以是任意类型的值, 将 p1 的状态改为成功结果传入的值
+            // resolve(123)
+            // 3. reject() 不传参数 将 p1 的状态改为失败结果为undefined
+            // reject()
+            // 4. reject(实参)传参, 可以是任意类型的值 将 p1 的状态改为失败结果为传入的值
+            // reject(456)
+            // 5. 代码执行错误(语法错误) 将 p1 的状态改为失败状态,结果为错误信息
+            // console.log(a)
+            // 6. 通过 throw 抛出错误对象或一个值 将 p1 的状态改为失败状态, 结果为错误信息
+
+            // 注意：return 不能改变 p1 的状态和结果
+            return 123
+        })
+
+        console.log(p1);
+
+
+
+    </script>
+</body>
+
+</html>
