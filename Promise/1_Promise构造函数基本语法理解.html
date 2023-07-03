@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1_Promise基本语法理解</title>
+    <title>1_Promise构造函数基本语法理解</title>
 </head>
 
 <body>
@@ -30,6 +30,7 @@
         1.创建Promise对象时，必须要传入执行器函数，否则报错 TypeError
         2.如果Promise对象为失败状态，错误会报在浏览器中
         3.对于一个Promise对象重点关注它的状态和结果
+        4.Promise对象的状态只能改变一次
         */
 
         // 创建一个Promise对象
@@ -52,7 +53,7 @@
             // console.log(a)
             // 6. 通过 throw 抛出错误对象或一个值 将 p1 的状态改为失败状态, 结果为错误信息
 
-            // 注意：return 不能改变 p1 的状态和结果
+            // 注意：return 不能改变 p1 的状态和结果 为进行中 结果为 undefined
             return 123
         })
 
