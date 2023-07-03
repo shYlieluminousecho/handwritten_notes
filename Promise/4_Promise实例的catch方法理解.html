@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_Promise实例的catch方法理解</title>
+</head>
+
+<body>
+    <script>
+        // Promise 对象的 catch 方法
+        // 用于捕获错误或定义失败状态的回调函数
+        // catch 方法执行后返回一个新的 Promise对象（链式调用）
+
+        let p1 = new Promise((resolve, reject) => {// 执行器函数
+            resolve(11);
+            // reject(22);
+            // 程序出错
+            // console.log(a);
+        })
+
+        p1.then(
+            (res) => {
+                console.log('p1成功', res);
+                // 程序出错
+                console.lag(123456789);
+            },
+            (res) => {
+                // 失败的回调函数，可以处理执行器函数中的错误，不能处理成功回调函数中的错误
+                console.log('p1失败', res);
+            }
+        )// p2
+            .catch((res) => {
+                // 可以捕获前面的错误，也可以作为p1失败的回调函数
+                console.log('有错或p1失败', res);
+            })
+
+
+
+        let p2 = new Promise((resolve, reject) => {// 执行器函数
+            // resolve(11);
+            reject(22);
+        })
+
+        // p2 失败的状态和结果会自动往下 传递/穿透
+        p2.then(
+            (res) => {
+                console.log('p2成功', res);
+            },
+            // (res)=>{// 往下 传递/穿透
+            //     throw res
+            // }
+        )// p3
+            .then(
+                (res) => {
+                    console.log('p3成功', res);
+                },
+                // (res)=>{// 往下 传递/穿透
+                //     // console.log(res);
+                //     throw res
+                // }
+            )// p4
+            .catch((res) => {
+                // 可以捕获前面的错误，也可以作为Promise对象失败的回调函数
+                console.log('有错或p?失败', res);
+            })
+
+
+
+
+    </script>
+</body>
+
+</html>
