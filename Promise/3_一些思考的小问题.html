@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_一些思考的小问题</title>
+</head>
+
+<body>
+    <script>
+
+        /*
+        1. 如何终止链式调用？返回一个进行中的 Promise 对象
+        2. 如果同一个 Promise 对象添加多个成功或失败的回调函数如何执行？依次执行
+        3. 是先指定成功和失败回调函数，还是先改变状态？都有可能
+        */
+
+        let p1 = new Promise((resolve, reject) => {
+            // resolve(123);
+            reject(456);
+        })
+
+        p1.then(
+            (res) => {
+                console.log('p1成功', res);
+            },
+            (res) => {
+                console.log('p1失败', res);
+
+                // 如何终止链式调用？返回一个进行中的Promise对象
+                return new Promise(() => { });
+            }
+        )// p2
+            .then(
+                (res) => {
+                    console.log('p2成功', res);
+                },
+                (res) => {
+                    console.log('p2失败', res);
+                }
+            )
+
+
+        // 如果同一个Promise对象添加多个成功或失败的回调函数如何执行？依次执行
+        let p3 = new Promise((resolve, reject) => {
+            // resolve(123);
+            reject(456);
+        })
+
+        p3.then(
+            (res) => {
+                console.log('p3成功1', res);
+            },
+            (res) => {
+                console.log('p3失败1', res);
+            }
+        )
+
+        p3.then(
+            (res) => {
+                console.log('p3成功2', res);
+            },
+            (res) => {
+                console.log('p3失败2', res);
+            }
+        )
+
+
+        // 是先指定成功和失败回调函数，还是先改变状态？
+        let p4 = new Promise((resolve, reject) => {// 同步执行
+            // 1.先改变状态，再指定成功和失败的回调函数
+            // resolve(123);
+            // reject(456);
+
+            // 2.先指定成功和失败的回调函数，再改变状态
+            setTimeout(() => {// 异步执行
+                console.log('异步任务');
+                resolve(555);
+                // reject(666);
+            }, 1000)
+        })
+
+        p4.then(// 同步执行
+            (res) => {// 异步执行
+                console.log('p4成功1', res);
+            },
+            (res) => {// 异步执行
+                console.log('p4失败1', res);
+            }
+        )
+    </script>
+</body>
+
+</html>
