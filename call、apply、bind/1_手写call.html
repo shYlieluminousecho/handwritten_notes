@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_手写call</title>
+</head>
+
+<body>
+    <script>
+        /*
+        原本 call 的特点：不考虑严格模式
+        1. 第一个参数是改变this的指向，如果是基本数据类型，会变为包装对象
+        2. 如果是null、undefined 指向window
+        3. 参数序列：从第二个参数后使用逗号依次传入
+        4. call的返回值为被借调的函数的返回值
+        注意：严格模式下 call不会对基本数据类型转换为包装对象
+        */
+        Function.prototype.myCall = function (obj, ...args) {
+            //null、undefined
+            if (!obj) {
+                return window
+            }
+            if (typeof obj !== 'object') {
+                obj = new obj.constructor(obj)
+            }
+            obj.fn = this
+            var res = obj.fn(...args)
+            delete obj.fn
+            return res
+        }
+
+        var name = '张三'
+        var obj = {
+            name: '李四',
+            fn: function () {
+                console.log(this.name);
+            }
+        }
+        var obj2 = {
+            name: '王五'
+        }
+        Number.prototype.name = '1234'
+        var f1 = obj.fn
+        f1.myCall()
+        obj.fn.myCall(obj2)
+        obj.fn.myCall(123)
+
+
+
+    </script>
+</body>
+
+</html>
