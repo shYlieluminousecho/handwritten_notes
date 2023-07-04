@@ -59,7 +59,6 @@
 
     // then 方法用于指定Promise对象成功状态和失败状态的回调函数
     Promise.prototype.then = function (resolveCallback, rejectCallback) { // 异步执行的函数
-        console.log('进来了');
         // 设置默认值的原因？保证能够继续链式调用
         resolveCallback = resolveCallback || function(res) { return res }
         rejectCallback = rejectCallback || function(res) { return res }
