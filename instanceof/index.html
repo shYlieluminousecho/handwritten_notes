@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写Instanceof</title>
+</head>
+
+<body>
+    <script>
+        /*
+        instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上
+        1. 如果是基本数据类型, 则返回 false
+        2. 如果是引用类型, 如果可以找到返回 true, 否则为 false
+        */
+        console.log('str' instanceof String); // false
+        console.log(new String('str') instanceof String); // true
+
+        function myInstanceof(obj, func) {
+            // 如果是基本数据类型则返回 false 以及 null、undefined
+            if (!(['function', 'object'].includes(typeof obj)) || !obj) {
+                return false
+            }
+            let right = func.prototype
+            let left = obj.__proto__
+
+            while (left !== right) {
+                left = left.__proto__
+                if (left === null) {
+                    return false
+                }
+            }
+            return true
+        }
+
+        console.log(myInstanceof('str', String));
+        console.log(myInstanceof(new String('str'), String));
+    </script>
+</body>
+
+</html>
