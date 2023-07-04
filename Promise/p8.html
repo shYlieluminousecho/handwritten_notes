@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <!-- version 8.0 版本8 实现静态方法 Promise.all 方法 -->
+    <script src="./js/p8.js"></script>
+    <script>
+        let p1 = new Promise(function (resolve, reject) { // 执行器函数
+            resolve(123)
+
+        })
+        let p2 = new Promise(function (resolve, reject) { // 执行器函数
+            resolve(456)
+
+        })
+        let p3 = new Promise(function (resolve, reject) { // 执行器函数
+            reject(789)
+        })
+
+        /*
+        原生 Promise.all 的理解
+        1. 只能接收到所有promise函数成功的回调函数的返回值, 如果某一个 promise函数失败, 则返回的新的Promise对象的状态跟随失败的promise函数
+        */
+        let p4 = Promise.all([p1, p2, p3]).then(res => {
+            console.log('p4 成功', res);
+        }, err => {
+            console.log('p4 失败', err);
+        })
+        // let p5 = Promise.all([1,2,3]).then(res => {
+        //     console.log(res);
+        // })
+
+
+    </script>
+</body>
+
+</html>
