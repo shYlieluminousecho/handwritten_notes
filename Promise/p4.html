@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <!-- version 4.0 版本4 搭建基本 Promise 对象实例的 then 方法 -->
+    <script src="./js/p4.js"></script>
+    <script>
+        let p1 = new Promise(function (resolve, reject) { // 执行器函数
+            console.log('执行器函数调用...');
+            // resolve(123)
+            setTimeout(resolve, 2000)
+            // reject(123)
+            // setTimeout(reject, 2000)
+
+        })
+        p1.then(
+            res => {
+                console.log('p1 成功', res);
+            },
+            err => {
+                console.log('p1 失败', err);
+            }
+        ).then(
+            res => {
+                console.log('p2 成功', res);
+            },
+            err => {
+                console.log('p2 失败', err);
+            }
+        )
+    </script>
+</body>
+
+</html>
