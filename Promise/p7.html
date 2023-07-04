@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <!-- version 7.0 版本7 搭建 Promise 对象 then 方法优化2和catch方法的实现 -->
+    <!-- <script src="./js/p7.js"></script> -->
+    <script>
+        let p1 = new Promise(function (resolve, reject) { // 执行器函数
+            resolve(123)
+            // setTimeout(resolve, 2000)
+            // reject(123)
+            // setTimeout(reject, 2000)
+
+        })
+        p1.then().then(res => {
+            console.log(res,'ssss_res');
+        })
+        p1.catch()
+        // p1.then(
+        //     res => {
+        //         console.log('p1 成功', res);
+        //         return 123
+        //         // return new Promise(function (resolve, reject) {
+        //         //     resolve(456)
+        //         //     // reject(456)
+        //         //     // throw 123
+        //         // })
+        //     },
+        //     err => {
+        //         console.log('p1 失败', err);
+        //     }
+        // ).then(
+        //     res => {
+        //         console.lag('p2 成功', res);
+        //     },
+        //     err => {
+        //         console.log('p2 失败', err);
+        //     }
+        // ).catch(
+        //     err => {
+        //         console.log('出错了', err);
+        //     }
+        // )
+    </script>
+</body>
+
+</html>
