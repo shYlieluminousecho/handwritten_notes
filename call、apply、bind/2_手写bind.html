@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_手写bind</title>
+</head>
+
+<body>
+    <script>
+        /*
+        原生 bind 函数的特点:
+        1. 第一个参数是需要改变的 this 指向
+        2. bind 返回一个新的函数, 新函数可以继续传参, 新函数可以作为构造函数调用
+        3. bind 不能多次改变 this 指向
+        4. 参数序列, 从第二个参数开始, 用逗号隔开的参数序列
+        bind 方法创建一个新的函数，在 ​​bind()​​ 被调用时，这个新函数的 ​​this​​ 被指定为 ​​bind()​​ 的第一个参数，而其余参数将作为新函数的参数，供调用时使用
+        */
+        Function.prototype.myBind = function () {
+            // 返回新函数
+            return function () {
+
+            }
+        }
+
+        Function.prototype.bind2 = function (context) {
+            var self = this; // test
+            // 获取参数序列
+            var args = Array.prototype.slice.call(arguments, 1);
+            console.log(args,context);
+
+            // 返回一个新的函数
+            return function () {
+                // 将 arguments 对象转为数组
+                var bindArgs = Array.from(arguments);
+                // 新函数可以继续传参 所以需要合并参数
+                var mergeArgs = args.concat(bindArgs);
+                console.log(bindArgs, mergeArgs, args);
+
+                var fn = function () {
+                    // 判断 this 指向 是否通过 new 构造函数方式创建
+                    var ctx = this instanceof fn ? this : context
+                    return self.apply(ctx, mergeArgs);
+                };
+
+                // 设置原型链
+                fn.prototype = Object.create(self.prototype);
+
+                return fn();
+            };
+        };
+
+        var name = '张三'
+        var obj = {
+            name: '李四'
+        }
+        function test() {
+            console.log('进来了');
+            console.log(this.name);
+            console.log(arguments, 'ssss');
+        }
+        let b1 = test.bind(obj)()
+
+
+
+
+
+        // let obj = {
+        //     name: "test",
+        //     age: 20
+        // }
+        // // 声明一个函数
+        // function fn(a, b, c) {
+        //     console.log("函数内部this指向:", this);
+        //     console.log("参数列表:", a, b, c);
+        // }
+        // // 使用bind创建一个新函数
+        // let newFn = fn.bind(obj, 10);
+        // newFn(20,30)
+        // // 调用新函数
+        // newFn();
+        // // 调用旧函数
+        // fn(10, 20, 30);
+
+        // let f1 = new newFn({name: '构造函数'})
+        // console.log(f1);
+
+        // class Person {
+
+        //     // 构造函数，初始化时指定name、age的值
+        //     constructor(name, age) {
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+
+        //     // 定义printInfo方法，输出信息
+        //     printInfo(sex) {
+        //         console.log(this.name, this.age, sex);
+        //     }
+        // }
+
+        // // 实例化类，获取对象
+        // const p = new Person("Jack", 12);
+
+        // // 调用printInfo方法
+        // p.printInfo("男"); // Jack 12 男
+
+        // // 使用bind更改this指向，同时传入参数，返回一个新函数
+        // const printInfo = p.printInfo.bind({ name: "rose", age: 11 }, "女");
+        // // 调用函数
+        // printInfo();
+
+
+
+    </script>
+</body>
+
+</html>
