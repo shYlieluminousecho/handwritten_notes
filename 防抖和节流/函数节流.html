@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数节流</title>
+</head>
+
+<body>
+    <script>
+        /*
+        为什么要节流?
+        针对一些高频触发事件, 我们需要降低它的执行频率,从而提高我们代码的性能
+        
+        目的: 降低高频触发事件的频率
+        实现原理：在连续触发的事件中，在规定的时间内只会触发一次，也就是说节流会保证在规定的时间内至少触发一次函数
+        */
+        function throttle(cb, delay) {
+            var timer
+            var prev = 0 // 记录上一次的时间
+            return function () {
+                var now = Date.now()
+                if (now - prev >= delay) {
+                    cb()
+                    prev = now
+                } else {
+                    clearTimeout(timer)
+                    // 保证至少会执行一次
+                    timer = setTimeout(cb, t)
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数防抖</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        /*
+        为什么要防抖?
+        针对一些高频触发事件, 我们需要控制它的执行频率,从而提高我们代码的性能
+        
+        目的：限制函数在短时间内多次执行, 防止用户有意或无意多次（重复）操作
+        实现原理：一段时间内只触发最后一次
+        */
+        function debounce(cb, delay = 300) {
+            var timer;
+            return function () {
+                clearTimeout(timer)
+                timer = setTimeout(cb, delay)
+            }
+        }
+
+        var ipt = document.querySelector('input')
+        ipt.oninput = debounce()
+
+
+    </script>
+</body>
+
+</html>
