@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_手写new</title>
+</head>
+
+<body>
+    <script>
+        /*
+        new 运算符做了什么？
+        1. 创建一个空对象
+        2. 设置原型链
+        3. 指向构造函数中的代码并设置this指向
+        5. 默认返回创建的新对象,如果返回的是基本数据类型,则会被忽略, 如果是引用类型则返回该引用类型
+        */
+        function _new(fun, ...args) {
+            // 创建空对象并设置原型链指向
+            let obj = Object.create(fun.prototype)
+            // 指向构造函数中的代码并设置this指向
+            let result = fun.apply(obj, args);
+            // 判断类型 返回对象
+            return typeof result === 'object' ? result : obj;
+        }
+
+        function Fn() {
+            this.name = '123'
+        }
+        let f = _new(Fn)
+        console.log(f.__proto__ == Fn.prototype);
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
