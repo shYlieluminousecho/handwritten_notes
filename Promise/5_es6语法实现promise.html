@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5_es6语法实现promise</title>
+</head>
+
+<body>
+    <script src="./js/es6语法实现promise.js"></script>
+    <script>
+        const p1 = new MyPromise((resolve, reject) => {
+            // 1. 成功的回调
+            // resolve(123)
+            // 2. 失败的回调
+            // reject(456)
+            // 3. 出现异常或抛出错误
+            // throw 123
+
+            setTimeout(() => {
+                reject(123)
+            }, 1000)
+
+            // 延时抛出错误 没有办法捕获
+            // setTimeout(() => {
+            //     throw 123
+            // })
+        })
+
+        p1.then(null, null)
+        .then(res => {
+            console.log('p2 成功', res);
+        }, err => {
+            console.log('p2 失败', err);
+        })
+        // p1.then(res => {
+        //     console.log('p1 成功2', res);
+        // }, err => {
+        //     console.log('p1 失败2', err);
+        // })
+
+
+    </script>
+</body>
+
+</html>
