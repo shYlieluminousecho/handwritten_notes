@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写Promise2</title>
+    <script src="./p1.js"></script>
+</head>
+
+<body>
+    <script>
+        const p1 = new MyPromise((resolve, reject) => {
+            resolve(123)
+
+        })
+        const p2 = p1.then(res => {
+            console.log('p1 成功', res);
+            // 循环引用
+            // return p2
+        })
+        // 穿透
+            .then().then().then(res => {
+                console.log('res', res);
+            })
+        // p2.then(res => {
+        //     console.log('p2 成功', res);
+        // }, err => {
+        //     console.log('p2 失败', err);
+        // })
+        // 多次调用
+        // p1.then(res => {
+        //     console.log('p1 成功', res);
+        // }, err => {
+        //     console.log('p1 失败', err);
+        // })
+
+    </script>
+</body>
+
+</html>
