@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach</title>
+</head>
+
+<body>
+    <script>
+        const oArr = [1, 2, 3, 4, 5]
+        // oArr.forEach((item,index,arr) => {
+        //     console.log(item);
+        //     arr.pop()
+
+        // })
+        // console.log(oArr);
+
+        // oArr.forEach(item => {
+        //     setTimeout(() => {
+        //         console.log(item + 1);
+        //     }, 1000)
+        // })
+        // console.log(oArr);
+
+        // forEach 不支持异步
+        /*  const ratings = [5, 4, 5];
+         let sum = 0;
+ 
+         const sumFunction = async (a, b) => {
+             return new Promise(resolve => {
+                 resolve(a + b)
+             })
+         };
+ 
+         ratings.forEach(async (rating) => {
+             // 获取到的 sum 永远是 0
+             sum = await sumFunction(sum, rating);
+         });
+ 
+         console.log(sum); */
+
+        /* const arr = [1,2,3,,,,,,,4,5,6,7]
+        let count = 0
+        arr.forEach(item => {
+            // console.log(item);
+            count++
+        })
+        console.log(count); // 7 */
+
+        /* class Counter {
+            constructor() {
+                this.sum = 0;
+                this.count = 0;
+            }
+            add(array) {
+                // 只有函数表达式才有自己的 this 绑定
+                array.forEach(function countEntry(entry) {
+                    this.sum += entry;
+                    ++this.count;
+                }, this);
+            }
+        }
+
+        const obj = new Counter();
+        obj.add([2, 5, 9]);
+        console.log(obj.count); // 3
+        console.log(obj.sum); // 16 */
+
+        /* const copy = (obj) => {
+            // 创建一个对象，并添加原型对象指向-> Object.prototype
+            const copy = Object.create(Object.getPrototypeOf(obj));
+            const propNames = Object.getOwnPropertyNames(obj);
+            propNames.forEach((name) => {
+                // 给每一个属性设置属性描述符
+                const desc = Object.getOwnPropertyDescriptor(obj, name);
+                // 在给拷贝的对象添加属性和值
+                Object.defineProperty(copy, name, desc);
+            });
+            return copy;
+        };
+
+        const obj1 = { a: 1, b: 2 };
+        console.log(Object.getOwnPropertyNames(obj1));
+        const obj2 = copy(obj1); // 现在 obj2 看起来和 obj1 一模一样了
+        console.log(obj2); */
+
+        // NOTE：不理解为什么没有 three 了
+        /* const words = ["one", "two", "three", "four"];
+        words.forEach((word) => {
+            console.log(word);
+            if (word === "two") {
+                words.shift(); //'one' 将从数组中删除, 会导致意外的结果, 数组的长度变化了
+            }
+        });
+
+        console.log(words); // ['two', 'three', 'four'] */
+        const arr = [1, 2, undefined, , , , 3, 4]
+        // arr.forEach(1)
+
+        // 手写 forEach
+        Array.prototype.myForEach = function (cb, context) {
+            if (typeof cb !== 'function') {
+                throw new TypeError(`${cb} is not a function`)
+            }
+            for (let i = 0; i < this.length; i++) {
+                if (!(this.hasOwnProperty(i))) continue
+                cb.call(context, this[i], i, this)
+            }
+        }
+        let count = 0
+        arr.myForEach((item, i, arr) => {
+            count++
+        })
+        console.log(count);
+
+
+
+
+    </script>
+</body>
+
+</html>

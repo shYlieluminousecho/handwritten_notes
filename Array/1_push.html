@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写 push 方法</title>
+</head>
+
+<body>
+    <script>
+        const arr = ['cat', 'dog', 'abc', 'xxx']
+        Array.prototype.myPush = function () {
+            console.log(arguments.length);
+            if (!this.length) {// 如果没有 length 属性, 就手动添加length属性
+                this.length = 0
+            }
+            if (isNaN(Number(this.length))) {
+                this.length = 0
+            }
+            for (let i = 0; i < arguments.length; i++) {
+                this[this.length] = arguments[i]
+            }
+            // 返回新数组的长度
+            return this.length
+        }
+        // arr.myPush(1, 2, 3, 4, 'bcd')
+        // arr.myPush()
+        console.log(arr.myPush(1));
+        console.log(arr);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写 reverse </title>
+</head>
+
+<body>
+    <script>
+        const colors = ['red', 'blue', 'green', 1, 2, 4]
+        Array.prototype.myReverse = function () {
+            let index = 0
+            const temp = [...this]
+            for (let i = this.length - 1; i >= 0; i--) {
+                this[index++] = temp[i]
+            }
+            return this
+        }
+
+        console.log(colors.myReverse());
+        console.log(colors);
+        // console.log(colors.reverse());
+        // console.log(colors);
+    </script>
+</body>
+
+</html>

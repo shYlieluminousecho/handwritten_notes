@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写 unshift 方法</title>
+</head>
+
+<body>
+    <script>
+        /*
+        需求：在 colors 第一项添加一个 pink 元素 ['pink', 'red','blue','green']
+        思路：arr[3] = arr[2] 、arr[2] = arr[1] arr[2] = arr[0] arr[0] = arguments[0]
+
+        */
+        const colors = ['red', 'blue', 'green']
+        Array.prototype.myUnshift = function () {
+            const arrLen = this.length // 3
+            const argLen = arguments.length // 4
+            for (let i = argLen + arrLen - 1; i >= 0; i--) {
+                // 临界条件是什么？
+                // 判断i大于数组长度的时候需要取数组中的数据
+                // 首先要想获取 this 中的数据下标只能是 0～2,所以下标为 i-argLen
+                if (i >= argLen) {
+                    // 大于长度时 需要取数组的数据
+                    this[i] = this[i - argLen]
+                } else {
+                    // 否则取arguments中的数据
+                    this[i] = arguments[i]
+                }
+            }
+            return this.length
+        }
+
+        console.log(colors.myUnshift(1, 2, 3, 4));
+        console.log(colors);
+
+
+    </script>
+</body>
+
+</html>

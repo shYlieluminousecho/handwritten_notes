@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写 splice 方法</title>
+</head>
+
+<body>
+    <script>
+        // const colors = ['red', 'blue', 'green', 1, 2, 3, 4, 5]
+        // 一个参数:
+        // colors.splice('2')
+        // console.log(colors.splice(true));
+        // console.log(colors.splice({}));
+        // console.log(colors.splice([1]));
+        // console.log(colors.splice(2.5));
+        // console.log(colors.splice(-2));
+        // arr.length = 3
+        // -start <= -arr.length => 0
+        // console.log(colors.splice(-3));
+        // console.log(colors.splice(0));
+        // console.log(colors.splice(9));
+        // console.log(colors.splice());
+        // console.log(colors.splice(undefined));
+        // console.log(colors.splice(null));
+
+        // 两个参数
+        // console.log(colors.splice(1,4));
+        // console.log(colors.splice(1,[3.5]));
+        // console.log(colors.splice(1,/^abc$/)); 
+        // console.log(colors.splice(1,9));
+        // console.log(colors.splice(1,-3));
+
+        // 三个参数
+        // console.log(colors.splice(1, 2, 'pink', 'cat'));
+        // console.log(colors.splice(1, -2, 'pink', 'cat'));
+        // console.log(colors.length);
+        const colors = ['red', 'blue', 'green',,,,,,]
+        // 表示视图删除, 由于第二个参数传递的不是整数，隐式转换失败为NaN，所以忽略了第二个参数，第一个参数 -20 实际上会被解释为 colors.length - 20。
+        // 由于数组长度不足 -20，splice() 方法将删除从索引位置 -20 开始到数组末尾的所有元素，并返回一个空数组 []
+        // console.log(colors.splice(-20, 'cat'));
+        // NOTE：不理解这个结果
+        // 强行理解：splice 大于三个参数，并且第二个参数 deleteCount 解析失败了，不是整数，所以相当于0不删除任何元素，在 -20 的位置插入元素
+        // console.log(colors.splice(-20, 'pink', 'orange', 'skyblue'));
+        console.log(colors.splice(20, 'pink', 'orange'));
+        console.log(colors);
+
+        // console.log(colors);
+        // Array.prototype.mySplice = function (start, delC, ...rest) {
+        //     let result = []
+        //     const len = this.length
+        //     if (!rest.length && start <= -len) {
+        //         result = [...this]
+        //         this.length = 0
+        //     }
+        //     return result
+        // }
+
+        // console.log(colors.mySplice(-9));
+        // console.log(colors);
+
+    </script>
+</body>
+
+</html>

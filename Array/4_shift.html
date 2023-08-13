@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写 shift 方法</title>
+</head>
+
+<body>
+    <script>
+        const colors = ['red', 'blue', 'green']
+        Array.prototype.myShift = function () {
+            if (this.length === 0) return undefined
+            const ans = this[0]
+            for (let i = 1; i < this.length; i++) {
+                this[i - 1] = this[i]
+            }
+            this.length--
+            return ans
+        }
+
+        console.log(colors.myShift());
+        console.log(colors);
+    </script>
+</body>
+
+</html>
