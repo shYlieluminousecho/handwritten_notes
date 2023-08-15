@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>indexOf方法</title>
+</head>
+
+<body>
+    <script>
+        const obj = { name: 'zs' }
+        const arr = [1, 3, 4, 5, 6, 7, 8, 9, obj, NaN]
+        const arr2 = [1, 2, 3, undefined, , , , , , 4, 5, 6]
+        console.log(arr.length);
+        // console.log(arr.indexOf(6, -9));
+        // console.log(arr.indexOf(obj))
+        // console.log(arr.indexOf(1, 9));
+        // console.log(arr.indexOf(9,-10));
+        // console.log(arr2.indexOf(undefined));
+        // console.log(arr.indexOf(2, -20));
+
+        Array.prototype.myIndexOf = function (searchVal, fromIndex) {
+            const len = this.length
+            if (fromIndex >= len) return -1
+            if (fromIndex < 0) fromIndex += len
+            if (!fromIndex) fromIndex = 0
+            for (let i = fromIndex; i < len; i++) {
+                // 过滤稀疏数组
+                if (!this.hasOwnProperty(i)) return -1
+                if (this[i] === searchVal) {
+                    return i
+                }
+            }
+            return -1
+        }
+        // console.log(arr.myIndexOf(6));
+        // console.log(arr.myIndexOf(obj));
+        // console.log(arr.myIndexOf(1, 9));
+        // console.log(arr.myIndexOf(3, -20));
+        // console.log(arr2.myIndexOf(undefined));
+        // console.log(arr.myIndexOf(2, -20));
+        console.log(arr.myIndexOf(NaN));
+    </script>
+</body>
+
+</html>

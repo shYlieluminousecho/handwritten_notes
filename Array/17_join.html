@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>join 方法</title>
+</head>
+
+<body>
+    <script>
+        const obj = { name: 'zs' }
+        const temp = [8, 8, 8]
+        const arr = [1, true, 'abc', false, 0, undefined, null, NaN, obj, temp]
+        const arr2 = [1, 2, , , , , , 4, 5, 6]
+        console.log(arr.join('&'));
+        console.log(arr2.join('='));
+        Array.prototype.myJoin = function (separator) {
+            let str = ''
+            for (let i = 0; i < this.length; i++) {
+                // 处理 undefined 和 null 的情况
+                if (this[i] === null || this[i] === undefined) this[i] = ''
+                str += this[i]
+                if (i !== this.length - 1) {
+                    str += separator
+                }
+            }
+            return str
+        }
+        console.log(arr.myJoin('&'));
+        console.log(arr2.myJoin('='));
+    </script>
+</body>
+
+</html>

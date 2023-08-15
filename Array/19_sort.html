@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sort 方法</title>
+</head>
+
+<body>
+    <script>
+        const obj = { name: 'zs' }
+        const temp = [8, 8, 8]
+        const arr = [1, true, 'abc', false, 0, undefined, null, NaN, obj, temp]
+        const arr2 = [1, 2, , , , , , 4, 5, 6]
+        // console.log(arr.sort());
+        console.log(arr.sort((a, b) => {
+            // console.log(a, b,'sss');
+            return a - b
+        }));
+        console.log('----------');
+        // console.log(arr2.sort());
+        // console.log(arr2.sort((a, b) => {
+        //     // console.log(a, b);
+        //     return a - b
+        // }));
+
+        Array.prototype.mySort = function () {
+            const len = this.length
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len; j++) {
+                    if (this[j] > this[j + 1]) {
+                        let temp = this[j]
+                        this[j] = this[j+1]
+                        this[j+1] = temp
+                    }
+                }
+            }
+            return this
+        }
+        console.log(arr.mySort());
+    </script>
+</body>
+
+</html>

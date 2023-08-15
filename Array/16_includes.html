@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>includes 方法</title>
+</head>
+
+<body>
+    <script>
+        const obj = { name: 'zs' }
+        const temp = [8, 8, 8]
+        const arr = [1, true, 'abc', undefined, null, NaN, obj, temp]
+        const arr2 = [1, 2, , , , , , 4, 5, 6]
+        // console.log(arr.includes(temp));
+        // console.log(arr.includes(NaN));
+        // console.log(arr.includes(undefined));
+        // console.log(arr2.includes(undefined));
+        console.log(arr.length);
+        console.log(arr.includes(true, -7));
+        console.log(arr.includes(true, 'abc'));
+
+        Array.prototype.myIncludes = function (searchVal, fromIndex) {
+            const len = this.length
+            if (!Number.isInteger(fromIndex) || fromIndex < -len) fromIndex = 0
+            if (fromIndex < 0) fromIndex += len
+            if (fromIndex >= len) return false
+            for (let i = fromIndex; i < len; i++) {
+                if (Object.is(this[i], searchVal)) {
+                    return true
+                }
+            }
+            return false
+        }
+        console.log(arr.myIncludes(true, -7));
+        console.log(arr.myIncludes(true, 'abc'));
+
+        // console.log(arr.myIncludes(temp));
+        // console.log(arr.myIncludes(NaN));
+        // console.log(arr.myIncludes(undefined));
+        // console.log(arr2.myIncludes(undefined));
+
+
+    </script>
+</body>
+
+</html>
