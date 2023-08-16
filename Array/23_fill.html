@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fill 方法</title>
+</head>
+
+<body>
+    <script>
+        // const arr = Array(9)
+        // console.log(arr.fill({ name: 'zs' }));
+        // arr[0].name = 'ls'
+        // console.log(arr);
+        // console.log(arr.fill(2, 13));
+
+        const arr = Array(9);
+        // for (let i = 0; i < arr.length; i++) {
+        //     arr[i] = new Array(4).fill(1); // 创建一个大小为 4 的数组，填充全 1
+        // }
+        // arr[0][0] = 10;
+        // console.log(arr[0][0]); // 10
+        // console.log(arr[1][0]); // 1
+        // console.log(arr[2][0]); // 1
+        // console.log(arr);
+
+        Array.prototype.myFill = function (val, start, end) {
+            const len = this.length
+            // 只有一个参数的时候
+            if (start === undefined && end === undefined) {
+                for (let i = 0; i < len; i++) {
+                    this[i] = val
+                }
+                return this
+            }
+
+            if (start < -len) start = 0
+            if (start < 0) start += len
+            if (start >= len) return this
+
+            // 只有start参数的时候
+            if (start !== undefined && end === undefined) {
+                for (let i = start; i < len; i++) {
+                    this[i] = val
+                }
+                return this
+            }
+            if (end < -len) end = 0
+            if (end < 0) end += len
+            if (end >= len) end = len
+            // 两个都存在的时候
+            for (let i = start; i < end; i++) {
+                this[i] = val
+            }
+            return this
+        }
+
+        // console.log(Array(9).fill(3));
+        // console.log(Array(9).fill(3, -10));
+        // console.log(Array(9).fill(3, 10));
+        // console.log(Array(9).fill(3, -4, -4));
+        // console.log(Array(9).fill(3, 3, 5));
+        // console.log(Array(9).fill(3, 3, -5));
+        // console.log(Array(9).fill(3, 3, 2));
+        // console.log(Array(9).fill(3, 10, 2));
+
+        // console.log(Array(9).myFill(3, 3, 5));
+        // console.log(Array(9).myFill(3, 10, 2));
+        // console.log(Array(9).myFill(3, 10));
+        // console.log(Array(9).myFill(3, -10));
+        // console.log(Array(9).myFill(3));
+        // console.log(arr.myFill(3, -4, -4));
+
+    </script>
+</body>
+
+</html>
