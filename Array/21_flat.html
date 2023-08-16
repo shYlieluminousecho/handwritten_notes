@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flat 方法</title>
+</head>
+
+<body>
+    <script>
+        /*
+        flat 方法用于将嵌套的数组展开为单个数组。
+        */
+        const arr = [1, 2, [3, 4, [6, [7, [8, [9]]]]], 5];
+        console.log(arr.flat());
+
+        Array.prototype.myFlat = function (depth) {
+            const dep = depth || 1
+            const newArr = Object(this)
+            // 缓存递归结果
+            const result = [];
+            (function myFlat(arr, dep) {
+                arr.forEach(item => {
+                    if (Array.isArray(item) && dep > 0) {
+                        myFlat(item, dep - 1)
+                    } else {
+                        result.push(item)
+                    }
+                })
+            })(newArr, dep)
+            return result
+        }
+        console.log(arr.myFlat(4));
+    </script>
+</body>
+
+</html>

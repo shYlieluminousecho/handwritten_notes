@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reduce 方法</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 2, 3, 4, 5, 6]
+        const arr2 = [1, 2, , , , , , , 3, 4, 5]
+        // arr.reduce((prev, cur, index, arr) => {
+        //     console.log(prev, cur, index, arr);
+
+        // })
+
+        // const res = arr.reduce((prev, cur, index, arr) => {
+        //     console.log(prev, cur, index, arr);
+        //     // return prev + cur
+        // }, [])
+        // console.log(res);
+        // arr.reduce(1)
+
+        Array.prototype.myReduce = function (cb, val) {
+            if (typeof cb !== 'function') {
+                throw new TypeError(`${cb} is not a function`)
+            }
+            let prev = val ? val : this[0]
+            let index = val ? 0 : 1
+            for (let i = index; i < this.length; i++) {
+                // 针对稀疏数组进行处理
+                if (!this.hasOwnProperty(i)) continue
+                prev = cb(prev, this[i], i, this)
+            }
+            return val
+        }
+        // arr.reduce()
+        // arr.reduce((prev, cur, i, arr) => {
+        //     console.log(prev, cur, i, arr);
+        //     return prev + cur
+        // }, [])
+        // arr.myReduce((prev, cur, i, arr) => {
+        //     console.log(prev, cur, i, arr);
+        //     return prev + cur
+        // }, [])
+        // let count = 0
+
+        arr2.reduce((prev, cur, i, arr) => {
+            // count++
+            console.log(prev, cur, i, arr);
+        })
+        // console.log(count,'ssss');
+
+        arr2.myReduce((prev, cur, i, arr) => {
+            console.log(prev, cur, i, arr);
+        })
+    </script>
+</body>
+
+</html>
