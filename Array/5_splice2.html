@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写 splice 方法</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 2, , , , , , , , 5, 6]
+        Array.prototype.mySplice = function (start, deleteCount) {
+            // 入参的元素个数
+            let argLen = arguments.length
+            // 原数组
+            let arr = Object(this)
+            // 数组长度
+            let len = arr.length
+            // 添加元素的个数
+            let addCount = argLen > 2 ? argLen - 2 : 0
+            // 计算有效的 start
+            let startIndex = computeSpliceStartIndex(start, len)
+            // 计算有效的 deleteCount
+            let delCount = computeSpliceDeleteCount(startIndex, deleteCount, len)
+            // 记录删除的数组元素
+            let deleteElements = new Array(delCount) // 创建一个delCount 长度的数组
+
+            // 将待删除元素记录到 deletedArray
+            recordDeleteElements(startIndex, delCount, arr, deleteElements)
+
+            // 移动数组元素
+            moveElements(startIndex, delCount, arr, addCount)
+
+            let i = startIndex
+            let argumentsIndex = 2
+            while (argumentsIndex < argLen) {
+                arr[i++] = arguments[argumentsIndex++]
+            }
+            arr.length = len - delCount + addCount
+
+            return deleteElements
+        }
+
+        // 计算真实的 start
+        function computeSpliceStartIndex(start, len) {
+            if (start < 0) {
+                start += len
+                return start < 0 ? 0 : start
+            }
+            // 超出边界问题
+            return start > len - 1 ? len - 1 : start
+        }
+
+        // 计算真实的 deleteCount
+        function computeSpliceDeleteCount(startIndex, deleteCount, len) {
+            // 超出边界问题
+            if (deleteCount > len - startIndex) deleteCount = len - startIndex
+            // 负值问题
+            if (deleteCount < 0) deleteCount = 0
+            return deleteCount
+        }
+
+        // 记录删除元素
+        function recordDeleteElements(startIndex, delCount, arr, deletedElements) {
+            for (let i = 0; i < delCount; i++) {
+                // 针对稀疏数组
+                if (!arr.hasOwnProperty(startIndex + i)) continue
+                deletedElements[i] = arr[startIndex + i]
+            }
+        }
+
+        // 移动数组元素，便于插入新元素
+        function moveElements(startIndex, delCount, arr, addCount) {
+            // 移动的位置
+            let over = addCount - delCount
+            if (over > 0) {
+                // 增加的数大于删除的数，向后移
+                for (let i = arr.length - 1; i >= startIndex + delCount; i--) {
+                    if (!arr.hasOwnProperty(i)) continue
+                    arr[i + over] = arr[i]
+                }
+            } else if (over < 0) {
+                // 增加的个数小于删除的个数，向前移动
+                for (let i = startIndex + delCount + over; i <= arr.length - 1; i++) {
+                    if (!arr.hasOwnProperty([i + Math.abs(over)])) continue
+                    arr[i] = arr[i + Math.abs(over)]
+                }
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -37,15 +37,15 @@
         // console.log(colors.splice(1, 2, 'pink', 'cat'));
         // console.log(colors.splice(1, -2, 'pink', 'cat'));
         // console.log(colors.length);
-        const colors = ['red', 'blue', 'green',,,,,,]
+        // const colors = ['red', 'blue', 'green',,,,,,]
         // 表示视图删除, 由于第二个参数传递的不是整数，隐式转换失败为NaN，所以忽略了第二个参数，第一个参数 -20 实际上会被解释为 colors.length - 20。
         // 由于数组长度不足 -20，splice() 方法将删除从索引位置 -20 开始到数组末尾的所有元素，并返回一个空数组 []
         // console.log(colors.splice(-20, 'cat'));
         // NOTE：不理解这个结果
         // 强行理解：splice 大于三个参数，并且第二个参数 deleteCount 解析失败了，不是整数，所以相当于0不删除任何元素，在 -20 的位置插入元素
         // console.log(colors.splice(-20, 'pink', 'orange', 'skyblue'));
-        console.log(colors.splice(20, 'pink', 'orange'));
-        console.log(colors);
+        // console.log(colors.splice(20, 'pink', 'orange'));
+        // console.log(colors);
 
         // console.log(colors);
         // Array.prototype.mySplice = function (start, delC, ...rest) {
@@ -60,6 +60,50 @@
 
         // console.log(colors.mySplice(-9));
         // console.log(colors);
+
+        const arr = [1, 2, 3, 4, 5]
+        const arr1 = [1, 2, 3, 4, 5]
+
+        // Array.prototype.mySplice = function (start, deleteCount, ...rest) {
+        //     // console.log(start, deleteCount, rest);
+        //     // 判断 start 的情况
+        //     if (start === undefined) return this
+        //     const len = this.length
+        //     if (start < -len) start = 0
+        //     if (start < 0) start += len
+        //     // 只有第一个参数, 就表示从当前位置截取到数组的末尾
+        //     if (deleteCount === undefined) {
+        //         const splitArr = []
+        //         for (let i = start; i < len; i++) {
+        //             splitArr.push(this[i])
+        //         }
+        //         this.length = start
+        //         return splitArr
+        //     }
+
+        //     // 有第二个参数，没有第三个参数情况 表示要删除的个数
+        //     if (deleteCount !== undefined && rest.length === 0) {
+        //         const newArr = []
+        //         for (let i = start; i <= deleteCount; i++) {
+        //             newArr.push(this[i])
+        //         }
+
+        //         // 调整原数组
+               
+        //         console.log(newArr);
+
+        //     }
+        // }
+
+        // console.log(arr.splice(1));
+        // console.log(arr.splice(-1));
+        console.log(arr.splice(8));
+        console.log(arr);
+
+        // console.log(arr1.mySplice(1));
+        // console.log(arr1.mySplice(1, 2));
+        // console.log(arr1);
+
 
     </script>
 </body>
