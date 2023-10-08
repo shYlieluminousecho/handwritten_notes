@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <title>deepClone</title>
+</head>
+
+<body>
+  <script>
+    /*
+      深拷贝逻辑：
+      1.如果是基本数据类型、函数、null就不处理了
+      2.如果是引用类型，正则对象需要特殊处理，因为会丢失constructor
+      3.剩余就是区分数组还是对象
+    */
+    function deepClone(value) {
+      if (typeof value !== 'object' || !obj) {
+        return value
+      }
+      // 进来这里表示是引用数据类型 {}、[]、Date、RegExp
+      if (value.constructor === RegExp) { // 如果是正则对象，则直接返回
+        return value
+      }
+      var result = Array.isArray(value) ? [] : new value.constructor()
+      // 遍历对象
+      for (var key in value) {
+        result[key] = deepClone(value[key])
+      }
+      return result
+    }
+
+  </script>
+</body>
+
+</html>
